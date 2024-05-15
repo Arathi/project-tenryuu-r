@@ -35,20 +35,14 @@ const MovieView: React.FC<MovieViewProps> = ({movie}) => {
 
   const detailsNodes: React.ReactNode[] = [];
   if (details !== null) {
-    if (details.length) {
-      detailsNodes.push(<Flex>长度：{details.length}</Flex>)
+    if (details.studio !== null || details.publisher !== null) {
+      detailsNodes.push()
     }
-    if (details.studio) {
-      detailsNodes.push(<Flex>制作商：{details.studio}</Flex>)
+    if (details.series !== null) {
+      detailsNodes.push(<Flex><strong>系列：</strong>{details.series ?? '-'}</Flex>);
     }
-    if (details.publisher) {
-      detailsNodes.push(<Flex>发行商：{details.publisher}</Flex>)
-    }
-    if (details.series) {
-      detailsNodes.push(<Flex>系列：{details.series}</Flex>)
-    }
-    if (details.director) {
-      detailsNodes.push(<Flex>导演：{details.series}</Flex>)
+    if (details.director !== null) {
+      detailsNodes.push(<Flex><strong>导演：</strong>{details.director ?? '-'}</Flex>);
     }
   }
 
@@ -65,10 +59,11 @@ const MovieView: React.FC<MovieViewProps> = ({movie}) => {
       backgroundColor: 'white',
       boxShadow: '1px 1px 5px gray',
     }}>
-      <Flex>
+      <Flex justify="center" align="center">
         <Image
           src={cover}
           alt={title}
+          width={200}
           preview={preview}
         />
       </Flex>
@@ -82,7 +77,18 @@ const MovieView: React.FC<MovieViewProps> = ({movie}) => {
           </span>
         </Flex>
         <Flex vertical flex={1}>
-          <Flex>番号：{id} / 发布时间：{releaseDate}</Flex>
+          <Flex gap={8}>
+            <Flex><strong>番号：</strong>{id}</Flex>
+            <Flex>/</Flex>
+            <Flex><strong>发布时间：</strong>{releaseDate}</Flex>
+            <Flex>/</Flex>
+            <Flex><strong>长度：</strong>{details?.length ?? '-'}</Flex>
+          </Flex>
+          <Flex gap={8}>
+            <Flex><strong>制作商：</strong>{details?.studio ?? '-'}</Flex>
+            <Flex> / </Flex>
+            <Flex><strong>发行商：</strong>{details?.publisher ?? '-'}</Flex>
+          </Flex>
           { detailsNodes }
         </Flex>
         <Flex gap={8}>{tagViews}</Flex>

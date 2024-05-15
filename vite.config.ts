@@ -5,14 +5,22 @@ import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    port: 31130,
+  },
   plugins: [
     react(),
     monkey({
       entry: 'src/main.tsx',
       userscript: {
         icon: 'https://www.javbus.com/favicon.ico',
+        name: 'Old Driver Helper R',
         namespace: 'com.undsf.tmus.odhr',
-        match: ['https://www.javbus.com/*'],
+        author: 'Arathi of Nebnizilla',
+        homepageURL: 'https://github.com/Arathi/project-tenryuu-r',
+        match: [
+          'https://www.javbus.com/*'
+        ],
       },
       build: {
         externalGlobals: {

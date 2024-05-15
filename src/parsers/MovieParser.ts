@@ -3,12 +3,12 @@ import Movie from "@/domains/Movie";
 import MovieDetails from "@/domains/MovieDetails";
 import Tag from "@/domains/Tag";
 
-const Selector = "div.masonry#waterfall div.item.masonry-brick a.movie-box";
+const SELECTOR = "div.masonry#waterfall div.item.masonry-brick a.movie-box";
 
 class MovieParser {
   async parseMovies(): Promise<Movie[]> {
     const movies: Movie[] = [];
-    const movieBoxes: NodeListOf<HTMLAnchorElement> = unsafeWindow.document.querySelectorAll(Selector);
+    const movieBoxes: NodeListOf<HTMLAnchorElement> = unsafeWindow.document.querySelectorAll(SELECTOR);
     movieBoxes.forEach(box => {
       const url = box.href;
       
@@ -79,13 +79,9 @@ class MovieParser {
         switch (header) {
           case '識別碼:':
           case 'ID:':
-            // @ts-ignore
-            // const bango = nextSibling?.innerText;
-            // console.info("读取到番号：", bango);
             break;
           case '發行日期:':
           case 'Release Date:':
-            // console.info("读取到发行日期");
             break;
           case '長度:':
           case 'Length:':

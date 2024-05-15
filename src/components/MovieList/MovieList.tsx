@@ -25,7 +25,7 @@ const MovieList: React.FC = () => {
   }, []);
 
   return (
-    <Flex vertical gap={8}>
+    <Flex vertical gap={8} style={{ marginTop: 10 }}>
       {movieViews}
     </Flex>
   );
